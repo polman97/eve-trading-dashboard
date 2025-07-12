@@ -9,4 +9,4 @@ docker compose up -d --build
 
 how to check logs:
 
-docker logs eve-dashboard
+docker exec -it eve-dashboard tail -f /app/app.log

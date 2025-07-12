@@ -1,26 +1,29 @@
 import threading
 import time
 import subprocess
+
+from app.api.api_main import on_startup
 from app.logging_config import get_logger
 
 logging = get_logger()
 
+#starts the api puller and whatnot
 def fetch_and_update_data():
-    while True:
-        logging.info("[Fetcher] Pulling data from API...")
-        # Do API calls, update database
-        time.sleep(1)  # Simulate waiting time
+    on_startup()
 
+#starts the strl dashboard
 def run_dashboard():
     logging.info("[Dashboard] Starting Streamlit app...")
-    subprocess.run(["streamlit", "run", "app/app.py", "--server.port=8501", "--server.address=0.0.0.0"])
+    subprocess.run(["streamlit", "run", "app/dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"])
 
+
+#starts both threads
 if __name__ == "__main__":
     t1 = threading.Thread(target=fetch_and_update_data)
-    t2 = threading.Thread(target=run_dashboard)
+    #t2 = threading.Thread(target=run_dashboard)
 
     t1.start()
-    t2.start()
+    #t2.start()
 
     t1.join()
-    t2.join()
+    #t2.join()
