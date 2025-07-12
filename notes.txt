@@ -10,3 +10,7 @@ docker compose up -d --build
 how to check logs:
 
 docker exec -it eve-dashboard tail -f /app/app.log
+
+
+update requirements:
+pip freeze > requirements.txt
