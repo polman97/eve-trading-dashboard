@@ -5,4 +5,4 @@ services:
       - "8501:8501"
     volumes:
       - .:/app
-    restart: always
+    restart: unless-stopped
