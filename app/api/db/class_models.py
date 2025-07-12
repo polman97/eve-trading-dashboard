@@ -7,6 +7,9 @@ from datetime import datetime
 from sqlalchemy.exc import SQLAlchemyError
 
 Base = declarative_base()
+
+### These are basically used to setup tables in the postgreSQL database through sqlalchemy. 
+
 class MarketOrder(Base):
     __tablename__ = 'market_orders'
     

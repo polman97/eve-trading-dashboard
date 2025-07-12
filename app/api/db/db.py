@@ -16,6 +16,8 @@ DB_NAME = 'eve-market'
 
 DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
+#TODO understand how sqlalchemy actually works :)
+
 # Create engine and session
 engine = create_engine(DATABASE_URL, echo=False)
 Session = sessionmaker(bind=engine)

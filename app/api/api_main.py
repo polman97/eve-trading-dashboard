@@ -11,18 +11,17 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def on_startup():
     logging.info('starting')
-    inv_types = invtypes_loader()
     main_loop()
     pass
 
 
 def main_loop():
-    i = 0
     #returns a list of item_id's 
     region_types = get_region_types()
+    #pulls all orders for each item_id and then updates the db 
     for current_id in region_types:
         get_market_data(current_id)
-    #exits the app, at wich point docker will automatically restart
+    #exits the app, at wich point docker will automatically restart #FIXME this is a bandaid, gotta figure out what's leaking memory
     time.sleep(10)
     sys.exit(0)
 
