@@ -1,4 +1,12 @@
+deploy pipeline:
+
 cd /eve-trading-dashboard
 git pull origin main
 docker compose down
 docker compose up -d --build
+
+
+
+how to check logs:
+
+docker logs eve-dashboard

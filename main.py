@@ -1,16 +1,19 @@
 import threading
 import time
 import subprocess
+from app.logging_config import get_logger
+
+logging = get_logger()
 
 def fetch_and_update_data():
     while True:
-        print("[Fetcher] Pulling data from API...")
+        logging.info("[Fetcher] Pulling data from API...")
         # Do API calls, update database
-        time.sleep(10)  # Simulate waiting time
+        time.sleep(1)  # Simulate waiting time
 
 def run_dashboard():
-    print("[Dashboard] Starting Streamlit app...")
-    subprocess.run(["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"])
+    logging.info("[Dashboard] Starting Streamlit app...")
+    subprocess.run(["streamlit", "run", "app/app.py", "--server.port=8501", "--server.address=0.0.0.0"])
 
 if __name__ == "__main__":
     t1 = threading.Thread(target=fetch_and_update_data)
