@@ -9,6 +9,7 @@ logging = get_logger()
 
 #starts the api puller and whatnot
 def fetch_and_update_data():
+    logging.info('Starting main process')
     on_startup()
 
 #starts the strl dashboard
