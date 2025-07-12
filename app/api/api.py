@@ -19,4 +19,17 @@ def get_market_data(item_id, region_id=10000002, location_id=60003760 ):
     save_orders(item_id, data)
     return data
     
+def get_region_types(region_id=10000002):
+    type_list = []
+    i = 1
+    while True:
+        data = preston.get_op('get_markets_region_id_types', region_id=region_id, page=i)
+        type_list.extend(data)
+        i += 1
+        if len (data) < 1000:
+            break
+    type_list = sorted(type_list)
+    return type_list
 
+def get_region_history(region_id, item_id):
+    data = preston.get_op('get_markets_region_id_history', region_id=region_id, type_id=item_id)

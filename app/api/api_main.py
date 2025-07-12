@@ -3,7 +3,7 @@ import time
 import os
 
 from app.logging_config import get_logger
-from app.api.api import get_market_data
+from app.api.api import get_market_data, get_region_types
 
 logging = get_logger()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -11,18 +11,21 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 def on_startup():
     logging.info('starting')
     inv_types = invtypes_loader()
-    main_loop(inv_types)
+    main_loop()
     pass
 
 
-def main_loop(inv_types):
+def main_loop():
     i = 0
+    region_types = get_region_types()
     while True:
-        if i >= len(inv_types):
+        if i >= len(region_types):
+            print('resetting orders')
+            region_types = get_region_types()
             i = 0
-        current_type = inv_types.iloc[i].to_dict()
-        current_id = current_type['TYPEID']
-        get_market_data(current_id)
+        current_id = region_types[i]
+        #get_market_data(current_id)
+        #print(current_id)
         i += 1
         
 
@@ -37,3 +40,4 @@ def invtypes_loader() -> pd.DataFrame:
     # clears all invtypes where marketgroupid is nan or an empty str
     inv_types = inv_types[inv_types['MARKETGROUPID'].notna() & (inv_types['MARKETGROUPID'].astype(str).str.strip() != '')]
     return inv_types
+
