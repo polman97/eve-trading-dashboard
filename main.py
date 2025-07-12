@@ -20,6 +20,7 @@ def run_dashboard():
 
 #starts both threads
 if __name__ == "__main__":
+    logging.info('Starting main.py')
     t1 = threading.Thread(target=fetch_and_update_data)
     #t2 = threading.Thread(target=run_dashboard)
 

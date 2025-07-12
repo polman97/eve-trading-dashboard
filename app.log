@@ -540,3 +540,44 @@
 [2025-07-12 20:04:29,232] INFO - retrieving orders for 574
 [2025-07-12 20:04:29,382] INFO - saving 30 orders for type_id 574 to the database
 [2025-07-12 20:04:29,395] INFO - retrieving orders for 575
+[2025-07-12 20:13:32,573] INFO - Starting main process
+[2025-07-12 20:13:32,574] INFO - starting
+[2025-07-12 20:13:32,840] INFO - retrieving orders for 18
+[2025-07-12 20:13:34,140] INFO - saving 18 orders for type_id 18 to the database
+[2025-07-12 20:13:34,158] INFO - retrieving orders for 19
+[2025-07-12 20:13:34,323] INFO - saving 0 orders for type_id 19 to the database
+[2025-07-12 20:13:34,332] INFO - retrieving orders for 20
+[2025-07-12 20:13:34,490] INFO - saving 80 orders for type_id 20 to the database
+[2025-07-12 20:13:34,516] INFO - retrieving orders for 21
+[2025-07-12 20:13:34,662] INFO - saving 6 orders for type_id 21 to the database
+[2025-07-12 20:13:34,672] INFO - retrieving orders for 22
+[2025-07-12 20:13:34,831] INFO - saving 16 orders for type_id 22 to the database
+[2025-07-12 20:13:34,846] INFO - retrieving orders for 34
+[2025-07-12 20:13:35,017] INFO - saving 136 orders for type_id 34 to the database
+[2025-07-12 20:13:35,051] INFO - retrieving orders for 35
+[2025-07-12 20:13:35,400] INFO - saving 156 orders for type_id 35 to the database
+[2025-07-12 20:13:35,432] INFO - retrieving orders for 36
+[2025-07-12 20:13:35,613] INFO - saving 124 orders for type_id 36 to the database
+[2025-07-12 20:13:35,638] INFO - retrieving orders for 37
+[2025-07-12 20:13:35,789] INFO - saving 152 orders for type_id 37 to the database
+[2025-07-12 20:13:35,819] INFO - retrieving orders for 38
+[2025-07-12 20:13:35,993] INFO - saving 164 orders for type_id 38 to the database
+[2025-07-12 20:13:36,026] INFO - retrieving orders for 39
+[2025-07-12 20:13:36,355] INFO - saving 175 orders for type_id 39 to the database
+[2025-07-12 20:13:36,429] INFO - retrieving orders for 40
+[2025-07-12 20:13:36,566] INFO - saving 111 orders for type_id 40 to the database
+[2025-07-12 20:13:36,595] INFO - retrieving orders for 41
+[2025-07-12 20:13:36,835] INFO - saving 19 orders for type_id 41 to the database
+[2025-07-12 20:13:36,852] INFO - retrieving orders for 42
+[2025-07-12 20:13:37,003] INFO - saving 20 orders for type_id 42 to the database
+[2025-07-12 20:13:37,019] INFO - retrieving orders for 43
+[2025-07-12 20:13:37,464] INFO - saving 18 orders for type_id 43 to the database
+[2025-07-12 20:13:37,480] INFO - retrieving orders for 44
+[2025-07-12 20:13:37,654] INFO - saving 73 orders for type_id 44 to the database
+[2025-07-12 20:13:37,676] INFO - retrieving orders for 45
+[2025-07-12 20:13:37,814] INFO - saving 26 orders for type_id 45 to the database
+[2025-07-12 20:13:37,831] INFO - retrieving orders for 178
+[2025-07-12 20:13:37,973] INFO - saving 34 orders for type_id 178 to the database
+[2025-07-12 20:13:37,990] INFO - retrieving orders for 179
+[2025-07-12 20:13:38,138] INFO - saving 25 orders for type_id 179 to the database
+[2025-07-12 20:13:38,152] INFO - retrieving orders for 180
