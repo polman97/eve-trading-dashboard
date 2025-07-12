@@ -7,7 +7,7 @@ def get_logger(name: str = "app", log_file: str = "app.log") -> logging.Logger:
     # Prevent duplicate handlers in case of repeated imports
     if not logger.handlers:
         # File handler
-        file_handler = logging.FileHandler(log_file)
+        file_handler = logging.FileHandler(log_file, mode='w')
         file_handler.setFormatter(logging.Formatter(
             "[%(asctime)s] %(levelname)s - %(message)s"
         ))

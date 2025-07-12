@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 import os
+import sys
 
 from app.logging_config import get_logger
 from app.api.api import get_market_data, get_region_types
@@ -17,16 +18,13 @@ def on_startup():
 
 def main_loop():
     i = 0
+    #returns a list of item_id's 
     region_types = get_region_types()
-    while True:
-        if i >= len(region_types):
-            print('resetting orders')
-            region_types = get_region_types()
-            i = 0
-        current_id = region_types[i]
+    for current_id in region_types:
         get_market_data(current_id)
-        i += 1
-        
+    #exits the app, at wich point docker will automatically restart
+    time.sleep(10)
+    sys.exit(0)
 
 def invtypes_loader() -> pd.DataFrame:
     """
