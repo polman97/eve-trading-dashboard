@@ -24,8 +24,7 @@ def main_loop():
             region_types = get_region_types()
             i = 0
         current_id = region_types[i]
-        #get_market_data(current_id)
-        #print(current_id)
+        get_market_data(current_id)
         i += 1
         
 
