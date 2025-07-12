@@ -28,7 +28,7 @@ jobs:
         username: gissa
         key: ${{ secrets.DEPLOY_KEY }}
         script: |
-          cd /path/to/your/project/on/server
+          cd /eve-trading-dashboard
           git pull origin main
           docker compose down
           docker compose up -d --build
