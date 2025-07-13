@@ -1,6 +1,6 @@
 
 from preston import Preston
-from app.api.db.db import save_orders
+from app.api.db.db import save_orders, save_history
 from datetime import datetime
 
 from app.logging_config import get_logger
@@ -56,5 +56,16 @@ def get_region_types(region_id=10000002) -> list:
 
 
 ## WIP
-def get_region_history(region_id, item_id):
-    data = preston.get_op('get_markets_region_id_history', region_id=region_id, type_id=item_id)
+def get_region_history(type_id:int, region_id=10000002) -> list:
+    """pulls the region history (last 365 days) of an item.
+
+    Args:
+        type_id (int): TYPEID of the item to pull from esi
+        region_id (int, optional): region id of history to pull, Defaults to 10000002 (the forge).
+
+    Returns:
+        list: _description_
+    """
+    data = preston.get_op('get_markets_region_id_history', region_id=region_id, type_id=type_id)    
+    save_history(data)
+    return data
