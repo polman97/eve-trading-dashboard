@@ -4,7 +4,7 @@ import os
 import sys
 
 from app.logging_config import get_logger
-from app.api.api import get_market_data, get_region_types
+from app.api.api import get_market_data, get_region_types, get_region_history
 
 logging = get_logger()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -18,6 +18,9 @@ def on_startup():
 def main_loop():
     #returns a list of item_id's 
     region_types = get_region_types()
+    #pulls history for region and updates db
+    for current_id in region_types:
+        get_region_history(current_id)
     #pulls all orders for each item_id and then updates the db 
     for current_id in region_types:
         get_market_data(current_id)

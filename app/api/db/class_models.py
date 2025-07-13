@@ -26,3 +26,14 @@ class MarketOrder(Base):
     min_volume = Column(BigInteger, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
     range_ = Column(String, nullable=False)
+
+class MarketHistory(Base):
+    __tablename__ = 'market_history'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    date = Column(Date, nullable=False, index=True)
+    average = Column(Float, nullable=False) 
+    highest = Column(Float, nullable=False)                    
+    lowest = Column(Float, nullable=False)                    
+    order_count = Column(Integer, nullable=False)              
+    volume = Column(Integer, nullable=False)                   
