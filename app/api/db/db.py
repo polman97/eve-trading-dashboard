@@ -59,7 +59,7 @@ def count_history_by_type(type_id: int):
 
 
 def save_orders(type_id, orders):
-    logging.info(f'saving {len(orders)} orders for type_id {type_id} to the database')
+    logging.debug(f'saving {len(orders)} orders for type_id {type_id} to the database')
     with get_session() as session:
         session.query(MarketOrder).filter(MarketOrder.type_id == type_id).delete()
 
@@ -83,7 +83,7 @@ def save_orders(type_id, orders):
         session.bulk_save_objects(new_orders)
 
 def save_history(type_id, history_data):
-    logging.info(f'Saving {len(history_data)} history entries for type_id {type_id} to the database')
+    logging.debug(f'Saving {len(history_data)} history entries for type_id {type_id} to the database')
 
     with get_session() as session:
         # Remove existing history for this type_id

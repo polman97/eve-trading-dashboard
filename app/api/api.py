@@ -23,7 +23,7 @@ def get_market_data(item_id, region_id=10000002, location_id=60003760 ) -> list:
     Returns:
         list: a list of dicts with the orders for the item in the system
     """
-    logging.info(f'retrieving orders for {item_id}')
+    logging.debug(f'retrieving orders for {item_id}')
     data = preston.get_op('get_markets_region_id_orders', order_type=all, region_id=region_id, type_id=item_id)
     data = [o for o in data if o['location_id'] == location_id ]
     #we change the issued to a format postgresql can read - remember this is in evetime (utc)
@@ -57,7 +57,7 @@ def get_region_types(region_id=10000002) -> list:
 
 
 ## WIP
-def get_region_history(type_id:int, region_id=10000002) -> list:
+def get_region_history(type_id:int, region_id=10000002, save_db=True) -> list:
     """pulls the region history (last 365 days) of an item.
 
     Args:
@@ -67,11 +67,12 @@ def get_region_history(type_id:int, region_id=10000002) -> list:
     Returns:
         list: _description_
     """
-    logging.info(f'retrieving history for {type_id}')
+    logging.debug(f'retrieving history for {type_id}')
     try:
         data = preston.get_op('get_markets_region_id_history', region_id=region_id, type_id=type_id)
-        logging.info(f'attempting to save {len(data)} days of history to the db')    
-        save_history(type_id, data)
+        if save_db:
+            logging.debug(f'attempting to save {len(data)} days of history to the db')    
+            save_history(type_id, data)
         return data
     except Exception as e:
         logging.error(Exception)
