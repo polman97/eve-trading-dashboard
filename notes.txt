@@ -14,3 +14,10 @@ docker logs -f eve-dashboard
 
 update requirements:
 pip freeze > requirements.txt
+
+
+Alembic:
+
+alembic revision --autogenerate -m "Your migration message" 
+
+alembic upgrade head

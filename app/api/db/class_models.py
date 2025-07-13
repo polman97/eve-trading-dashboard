@@ -37,4 +37,4 @@ class MarketHistory(Base):
     highest = Column(Float, nullable=False)                    
     lowest = Column(Float, nullable=False)                    
     order_count = Column(Integer, nullable=False)              
-    volume = Column(Integer, nullable=False)                   
+    volume = Column(BigInteger, nullable=False)                   
