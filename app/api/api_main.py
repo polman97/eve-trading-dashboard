@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from app.logging_config import get_logger
 from app.api.api import get_market_data, get_region_types, get_region_history
 from app.api.db.db import get_history_df
+from app.api.math.initial_calcs import basic_inisghts
 
 logging = get_logger()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -20,29 +21,33 @@ def on_startup():
 def main_loop():
     #returns a list of item_id's 
     region_types = get_region_types()
-    # we pull market history in our db for plex. if the latest entry is older then yesterday, then we have to update it
-    df = get_history_df(31704)
+    # pulling plex history from db to check how old it is
+    df = get_history_df(44992)
     df['date'] = pd.to_datetime(df['date'])
     latest_date_db = df['date'].max().date()
-    api_plex = pd.DataFrame(get_region_history(31704, save_db=False))
+    # pulling plex history from api to see if it's newer
+    api_plex = pd.DataFrame(get_region_history(44992, save_db=False))
     api_plex['date'] = pd.to_datetime(api_plex['date'])
     latest_date_api = api_plex['date'].max().date()
     if latest_date_db == latest_date_api:
-        logging.info(f"Latest data is up to date, last history pull: {latest_date_api}")
+        logging.info(f"history data is up to date, last history pull: {latest_date_api}")
+    # if plex history is newer, we pull the updated history from api
     else:
-        logging.info(f'history is out of date, latest history pull: {latest_date_api}. retriving market history for {len(region_types)} TYPEIDs')
+        logging.info(f'history data is out of date, latest history pull: {latest_date_api}. retriving market history for {len(region_types)} TYPEIDs')
         i = 1
         for current_id in region_types:
             get_region_history(current_id)
+            basic_inisghts(current_id)
             i += 1
             if i % 100 == 0:
                 logging.info(f'Retrieved market history for {i}/{len(region_types)} TYPEIDs')
         logging.info('Finished retrieving market history.')
-    #pulls all orders for each item_id and then updates the db 
+    #then we pull all current orders from api for each TYPEID and update db 
     i = 1
     logging.info(f'Retrieving market orders for {len(region_types)} TYPEIDs')
     for current_id in region_types:
         get_market_data(current_id)
+        
         i += 1
         if i % 100 == 0:
             logging.info(f'Retrieved market orders for {i}/{len(region_types)} TYPEIDs')

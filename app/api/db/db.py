@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 import pandas as pd
 from contextlib import contextmanager
 
-from app.api.db.class_models import Base, MarketOrder, MarketHistory
+from app.api.db.class_models import Base, MarketOrder, MarketHistory, MarketInsight
 from app.logging_config import get_logger
 
 logging = get_logger()
@@ -105,6 +105,31 @@ def save_history(type_id, history_data):
 
         session.bulk_save_objects(new_history)
         
+def save_insight(insight_data: dict):
+    logging.debug(f"Saving insights for type_id {insight_data['type_id']} to the database")
+
+
+    with get_session() as session:
+        # Remove any existing insight for this type_id to prevent duplicates
+        session.query(MarketInsight).filter(MarketInsight.type_id == insight_data["type_id"]).delete()
+
+        # Create a new MarketInsight instance
+        insight = MarketInsight(
+            type_id=insight_data["type_id"],
+            name=insight_data["name"],
+            min_sell=insight_data["min_sell"],
+            max_buy=insight_data["max_buy"],
+            margin=insight_data["margin"],
+            volume=insight_data["volume"],
+            volume_7d_avg=insight_data["volume_7d_avg"],
+            price_change_1d=insight_data["price_change_1d"],
+            price_volatility_7d=insight_data["price_volatility_7d"],
+            price_trend_ratio_7d_90d=insight_data["price_trend_ratio_7d_90d"],
+            imbalance=insight_data["imbalance"],
+            last_updated=insight_data["last_updated"]
+        )
+
+        session.add(insight)
 
 def get_orders_df(type_id: int) -> pd.DataFrame:
     with get_session() as session:
@@ -137,3 +162,12 @@ def get_history_df(type_id: int) -> pd.DataFrame:
         df = pd.DataFrame(history_dicts)
 
     return df
+
+def get_insight_df(type_id: int) -> pd.DataFrame:
+    with get_session() as session:
+        insight = session.query(MarketInsight).filter(MarketInsight.type_id == type_id).first()
+        if not insight:
+            return pd.DataFrame()  # Empty DF if no data
+
+        insight_dict = {k: v for k, v in insight.__dict__.items() if k != '_sa_instance_state'}
+        return pd.DataFrame([insight_dict])

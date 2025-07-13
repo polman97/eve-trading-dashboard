@@ -38,3 +38,24 @@ class MarketHistory(Base):
     lowest = Column(Float, nullable=False)                    
     order_count = Column(Integer, nullable=False)              
     volume = Column(BigInteger, nullable=False)                   
+
+class MarketInsight(Base):
+    __tablename__ = 'market_insights'
+
+    type_id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+
+    min_sell = Column(Float, nullable=False)
+    max_buy = Column(Float, nullable=False)
+    margin = Column(Float, nullable=False)
+
+    volume = Column(Float, nullable=False)
+    volume_7d_avg = Column(Float, nullable=False)
+
+    price_change_1d = Column(Float, nullable=False)
+    price_volatility_7d = Column(Float, nullable=False)
+    price_trend_ratio_7d_90d = Column(Float, nullable=False)
+
+    imbalance = Column(Float, nullable=False)
+
+    last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
