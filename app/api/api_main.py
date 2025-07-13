@@ -22,11 +22,11 @@ def main_loop():
     #returns a list of item_id's 
     region_types = get_region_types()
     # pulling plex history from db to check how old it is
-    df = get_history_df(44992)
+    df = get_history_df(34)
     df['date'] = pd.to_datetime(df['date'])
     latest_date_db = df['date'].max().date()
     # pulling plex history from api to see if it's newer
-    api_plex = pd.DataFrame(get_region_history(44992, save_db=False))
+    api_plex = pd.DataFrame(get_region_history(34, save_db=False))
     api_plex['date'] = pd.to_datetime(api_plex['date'])
     latest_date_api = api_plex['date'].max().date()
     if latest_date_db == latest_date_api:
