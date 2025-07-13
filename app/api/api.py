@@ -2,6 +2,7 @@
 from preston import Preston
 from app.api.db.db import save_orders, save_history
 from datetime import datetime
+import requests
 
 from app.logging_config import get_logger
 logging = get_logger()
@@ -67,7 +68,12 @@ def get_region_history(type_id:int, region_id=10000002) -> list:
         list: _description_
     """
     logging.info(f'retrieving history for {type_id}')
-    data = preston.get_op('get_markets_region_id_history', region_id=region_id, type_id=type_id)
-    logging.info(f'attempting to save {len(data)} days of history to the db')    
-    save_history(type_id, data)
-    return data
+    try:
+        data = preston.get_op('get_markets_region_id_history', region_id=region_id, type_id=type_id)
+        logging.info(f'attempting to save {len(data)} days of history to the db')    
+        save_history(type_id, data)
+        return data
+    except Exception as e:
+        logging.error(Exception)
+        return None
+    
