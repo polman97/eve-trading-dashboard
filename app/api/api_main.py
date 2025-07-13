@@ -30,14 +30,13 @@ def main_loop():
     api_plex['date'] = pd.to_datetime(api_plex['date'])
     latest_date_api = api_plex['date'].max().date()
     if latest_date_db == latest_date_api:
-        logging.info(f"history data is up to date, last history pull: {latest_date_api}")
+        logging.info(f"history data is up to date, last history pull: {latest_date_db}")
     # if plex history is newer, we pull the updated history from api
     else:
-        logging.info(f'history data is out of date, latest history pull: {latest_date_api}. retriving market history for {len(region_types)} TYPEIDs')
+        logging.info(f'history data is out of date, latest history pull: {latest_date_db}, latest available history: {latest_date_api}. retriving market history for {len(region_types)} TYPEIDs')
         i = 1
         for current_id in region_types:
             get_region_history(current_id)
-            basic_inisghts(current_id)
             i += 1
             if i % 100 == 0:
                 logging.info(f'Retrieved market history for {i}/{len(region_types)} TYPEIDs')
@@ -47,7 +46,7 @@ def main_loop():
     logging.info(f'Retrieving market orders for {len(region_types)} TYPEIDs')
     for current_id in region_types:
         get_market_data(current_id)
-        
+        basic_inisghts(current_id)
         i += 1
         if i % 100 == 0:
             logging.info(f'Retrieved market orders for {i}/{len(region_types)} TYPEIDs')
