@@ -55,7 +55,8 @@ def basic_inisghts(type_id):
         save_insight(insights)
     
     except Exception as e:
-        logging.info(f"could not do calcs for {type_id}")
+        logging.info(f"could not do calcs for TYPEID{type_id}: {get_type_name(type_id)}")
+        logging.warning(e)
     
     
 
