@@ -69,5 +69,5 @@ def get_region_history(type_id:int, region_id=10000002) -> list:
     logging.info(f'retrieving history for {type_id}')
     data = preston.get_op('get_markets_region_id_history', region_id=region_id, type_id=type_id)
     logging.info(f'attempting to save {len(data)} days of history to the db')    
-    save_history(data)
+    save_history(type_id, data)
     return data

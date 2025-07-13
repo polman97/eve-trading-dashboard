@@ -31,6 +31,7 @@ class MarketHistory(Base):
     __tablename__ = 'market_history'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
+    type_id = Column(Integer, nullable=False, index=True) 
     date = Column(Date, nullable=False, index=True)
     average = Column(Float, nullable=False) 
     highest = Column(Float, nullable=False)                    

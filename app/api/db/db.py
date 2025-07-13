@@ -90,7 +90,7 @@ def save_history(type_id, history_data):
             volume=h['volume']
         )
         new_history.append(entry)
-
+    
     session.bulk_save_objects(new_history)
     session.commit()
 
