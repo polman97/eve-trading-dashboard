@@ -9,8 +9,8 @@
     7 day change
     90 day change    
 """
-from app.api.db.db import get_orders_df, get_history_df, save_insight, get_insight_df
-from app.api.math.utils import get_type_name
+from app.db.db import get_orders_df, get_history_df, save_insight, get_insights_full
+from app.math.utils import get_type_name
 import pandas as pd
 from datetime import datetime
 from app.logging_config import get_logger
@@ -55,7 +55,7 @@ def basic_inisghts(type_id):
         save_insight(insights)
     
     except Exception as e:
-        logging.info(f"could not do calcs for TYPEID{type_id}: {get_type_name(type_id)}")
+        logging.info(f"could not do calcs for TYPEID {type_id}: {get_type_name(type_id)}")
         logging.warning(e)
     
     

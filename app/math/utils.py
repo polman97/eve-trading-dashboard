@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "..", ".."))
+ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", ".."))
 CSV_PATH = os.path.join(ROOT_DIR, "SDE", "invTypes.csv")
 
 invtypes_df = pd.read_csv(CSV_PATH)

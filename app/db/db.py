@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 import pandas as pd
 from contextlib import contextmanager
 
-from app.api.db.class_models import Base, MarketOrder, MarketHistory, MarketInsight
+from app.db.class_models import Base, MarketOrder, MarketHistory, MarketInsight
 from app.logging_config import get_logger
 
 logging = get_logger()
@@ -163,7 +163,7 @@ def get_history_df(type_id: int) -> pd.DataFrame:
 
     return df
 
-def get_insight_df(type_id: int) -> pd.DataFrame:
+def get_insight_type(type_id: int) -> pd.DataFrame:
     with get_session() as session:
         insight = session.query(MarketInsight).filter(MarketInsight.type_id == type_id).first()
         if not insight:
@@ -171,3 +171,9 @@ def get_insight_df(type_id: int) -> pd.DataFrame:
 
         insight_dict = {k: v for k, v in insight.__dict__.items() if k != '_sa_instance_state'}
         return pd.DataFrame([insight_dict])
+    
+def get_insights_full() -> pd.DataFrame:
+    with get_session() as session:
+        query = session.query(MarketInsight)
+        df = pd.read_sql(query.statement, session.bind)
+    return df

@@ -5,9 +5,9 @@ import sys
 from datetime import datetime, timedelta
 
 from app.logging_config import get_logger
-from app.api.api import get_market_data, get_region_types, get_region_history
-from app.api.db.db import get_history_df
-from app.api.math.initial_calcs import basic_inisghts
+from app.api import get_market_data, get_region_types, get_region_history
+from app.db.db import get_history_df
+from app.math.initial_calcs import basic_inisghts
 
 logging = get_logger()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

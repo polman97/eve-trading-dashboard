@@ -2,7 +2,7 @@ import threading
 import time
 import subprocess
 
-from app.api.api_main import on_startup
+from app.api_main import on_startup
 from app.logging_config import get_logger
 
 logging = get_logger()

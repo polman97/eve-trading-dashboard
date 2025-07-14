@@ -1,6 +1,6 @@
 
 from preston import Preston
-from app.api.db.db import save_orders, save_history
+from app.db.db import save_orders, save_history
 from datetime import datetime
 import requests
 
