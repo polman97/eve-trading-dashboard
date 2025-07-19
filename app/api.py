@@ -87,3 +87,17 @@ def get_region_history(type_id:int, region_id=10000002, save_db=True) -> list:
         logging.error(Exception)
         return None
     
+
+def get_charater_assets_location(character_id:int, location_id=60003760):
+    assets = []
+    i = 1
+    while True:
+        data = preston.get_op('get_characters_character_id_assets', character_id = character_id, page=i)
+        assets.extend(data)
+        i += 1
+        if len(data) < 1000:
+            break
+    assets = [ o for o in assets if o['location_id'] == location_id]
+    return assets
+
+

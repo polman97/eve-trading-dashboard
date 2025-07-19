@@ -20,3 +20,6 @@ def get_type_name(type_id: int) -> str:
     """Return the type name for a given type ID from the invtypes.csv"""
     result = invtypes_df.loc[invtypes_df["TYPEID"] == type_id, "TYPENAME"]
     return result.values[0] if not result.empty else None
+
+
+

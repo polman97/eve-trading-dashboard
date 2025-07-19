@@ -15,7 +15,7 @@ def fetch_and_update_data():
 #starts the strlt dashboard
 def run_dashboard():
     logging.info("[Dashboard] Starting Streamlit app...")
-    subprocess.run(["streamlit", "run", "app/dashboard/app.py", "--server.port=8501", "--server.address=0.0.0.0"])
+    subprocess.run(["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"])
 
 
 #starts both threads
